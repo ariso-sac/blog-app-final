@@ -1,0 +1,26 @@
+{% extends 'base.html' %}
+{% block content %}
+<div id="app">
+    <div class="text-center mb-4" style="width: 50%;margin-top: 10%;margin-left:20%;">
+        <h2>Post Creation Page</h2>
+        <div class="form-label-group">
+            <label>Your user id</label>
+            <input type="text" class="form-control" value="{{current_user.id}}" disabled v-bind="id" id="user">
+        </div>
+        <div class="form-label-group">
+            <label>Enter you Post Title</label>
+            <input type="text" class="form-control" placeholder="Enter Post Title" required autofocus v-model="title">
+        </div>
+        <div class="form-label-group">
+            <label>Enter you Post</label>
+            <input type="text" class="form-control" placeholder="Enter Post" required autofocus v-model="text">
+        </div>
+        <div class="form-label-group" style="visibility: hidden;">
+            <label>Intial likes</label>
+            <input type="number" class="form-control" value="0" v-model="likes">
+        </div>
+        <button class="btn btn-lg btn-primary btn-block" @click="submit">Submit</button>
+    </div>
+</div>
+<script src="/static/js/create.js"></script>
+{% endblock %}

@@ -1,0 +1,86 @@
+{% extends 'base.html' %}
+{% block content %}
+<div id="app">
+    {% raw %}
+
+    <marquee direction="left" style="font-size: 25;font: wieght 2px;color:crimson">
+        Default Username - user@mail.com, Password - user
+    </marquee>
+
+    <main role="main">
+
+        <section class="jumbotron text-center">
+            <div class="container">
+                <h1 class="jumbotron-heading">Welcome to Blog App Attempt By Sachin</h1>
+                <p class="lead text-muted">Something short and leading about the collection below—its contents, the
+                    creator, etc. Make it short and sweet, but not too short so folks don't simply skip over it
+                    entirely.</p>
+                <p>{{name}}</p>
+                <p>
+                    <a href="/create" class="btn btn-primary my-2">Create a Post</a>
+                    <a href="/login" class="btn btn-secondary my-2">Login</a>
+                </p>
+            </div>
+        </section>
+
+        <div class="album py-5 bg-light">
+            <div class="container">
+
+                <div class="row">
+
+
+                    <div class="col-md-4" v-for="post in posts">
+                        <div class="card mb-4 box-shadow">
+                            <img class="card-img-top" src="/static/img/image.jpg" alt="Card image cap">
+                            <div class="card-body">
+                                <h5 class="card-title">{{post.title}}</h5>
+                                <p class="card-text">{{post.text}}</p>
+                                <div class="d-flex justify-content-between align-items-center">
+                                    <div class="btn-group">
+                                        {% endraw %}
+                                        {% if current_user.is_authenticated %}
+
+                                        <button type="button" class="btn btn-sm btn-outline-secondary"
+                                            v-on:click="delete_post(post.id)">Delete</button>
+                                        {% endif %}
+                                        {% raw %}
+                                        <button type="button" class="btn btn-sm btn-outline-secondary"
+                                            v-on:click="like(post.id)">Likes {{post.likes}}</button>
+
+                                        <button type="button" class="btn btn-sm btn-outline-secondary"
+                                            v-on:click="showhide()">Comments</button>
+                                    </div>
+
+                                    <small class="text-muted" style="padding-left: 10px;">Update on :
+                                        {{post.updated_on}}</small>
+                                </div>
+                            </div>
+                            <div class="card-body bg-dark text-white" id="comments" style="display: none;">
+                                <p class="font-weight-bold">Comments</p>
+                                <p class="font-italic">{{post.comments}}</p>
+                            </div>
+                        </div>
+                    </div>
+
+
+                </div>
+            </div>
+        </div>
+
+    </main>
+    {% endraw %}
+</div>
+<footer class="text-muted">
+    <div class="container">
+        <p class="float-right">
+            <a href="#">Back to top</a>
+        </p>
+        <p>Inspired by Album template of Bootstap 4 </p>
+    </div>
+</footer>
+
+<!-- Bootstrap core JavaScript
+    ================================================== -->
+<!-- Placed at the end of the document so the pages load faster -->
+<script src="/static/js/view.js"></script>
+{% endblock %}
